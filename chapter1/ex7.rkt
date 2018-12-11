@@ -18,7 +18,7 @@
 (define (square x) (* x x))
 (define (sqrt x) (sqrt-iter 1.0 x))
 
-;; This fails spectacularly because the correctness required is too large compared to the answer
+;; This fails spectacularly because the correctness required is too large compared to the answer?
 ; (display (square (sqrt 0.000000000009)))
 
 ;;(display (square (sqrt 10000000000000))) ;; seems at 10^13 it starts to take forever? Cos of the number overflows? Nothing so far that mentions

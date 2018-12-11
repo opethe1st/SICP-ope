@@ -17,7 +17,7 @@
     )
 )
 
-; this is an iterative process too
+; this is an iterative process
 ; the state of the computation is completely deescribed by the input arguments
 ; for (+ 4 5) we have
 ; (+ 3 6) then
