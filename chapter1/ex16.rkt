@@ -7,24 +7,25 @@
     )
 )
 
+(define (halve a)
+    (/ a 2)
+)
 
 (define (square x)
     (* x x)
 )
 
 
-(define (fast-exp-iter b n a)
-    ; (display a)
-    ; (newline)
-    (cond   ((= n 0) a)
-            ((even? n) (square (fast-exp-iter b (/ n 2) a)))
-            (else (* b (fast-exp-iter b (- n 1) a)))
+(define (binary-exp-iter b n ans)
+    (cond   ((= n 0) ans)
+            ((even? n) (binary-exp-iter (square b) (halve n) ans))
+            (else (binary-exp-iter b (- n 1) (* b ans)))
     )
 )
 
 
 (define (fast-exp b n)
-    (fast-exp-iter b n 1)
+    (binary-exp-iter b n 1)
 )
 
 
