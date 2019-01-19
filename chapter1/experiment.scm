@@ -9,4 +9,4 @@
 )
 
 
-(display ((get-plus-operator) (get-operand 3) (get-operand 4)))
+(get-plus-operator) (get-operand 3) (get-operand 4))
