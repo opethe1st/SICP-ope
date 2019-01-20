@@ -1,4 +1,4 @@
-#lang racket
+
 ; compute terms of the pascal triangle
 (define (combination n r)
     (if (or (= n r) (= r 0))
@@ -6,6 +6,7 @@
         (+ (combination (- n 1) (- r 1)) (combination (- n 1) r))
     )
 )
+
 ; test
 (display (= (combination 0 0) 1))
 (newline)

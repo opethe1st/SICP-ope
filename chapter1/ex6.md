@@ -1,4 +1,4 @@
-#Exercise 1.6
+# Exercise 1.6
 
 (define (new-if predicate then else)
     (cond   (predicate then)
@@ -6,4 +6,4 @@
     )
 )
 
-Goes into an infinite loop, because it keeps trying to evaluate the if and else clauses - this never stops the function is recursive
+Goes into an infinite loop, because it keeps trying to evaluate the if and else clauses - this never stops because the function is recursive

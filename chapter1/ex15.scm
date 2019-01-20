@@ -1,12 +1,8 @@
-#lang racket
-
-
 (define (cube x)
     (* x x x)
 )
-(define a 0)
+
 (define (p x)
-    (set! a (+ a 1))
     (- (* 3 x) (* 4 (cube x)))
 )
 (define (sine angle)

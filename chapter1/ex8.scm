@@ -1,6 +1,3 @@
-#lang racket
-
-
 (define (cube-root x)
 
     (define (cube x)

@@ -1,6 +1,5 @@
-#lang racket
 
-;; iterative
+;; recursive
 (define (f n)
     (if (< n 3)
         n
@@ -8,6 +7,7 @@
     )
 )
 
+; iterative
 (define (g n)
     (define (g-iter a b c n)
         (cond   ((< n 1) 0)
@@ -20,6 +20,7 @@
     (g-iter 4 2 1 n)
 )
 
+; tests to make sure these give the same result
 (display "\n")
 (display (= (g 1) (f 1)))
 (display "\n")

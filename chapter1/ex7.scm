@@ -1,5 +1,3 @@
-#lang racket
-
 
 (define (sqrt-iter guess x)
     (if (good-enough? guess x)
@@ -8,21 +6,26 @@
     )
 )
 
-(define (improve guess x) (average guess (/ x guess)))
-
-(define (average x y) (/ (+ x y) 2))
-
 (define (good-enough? guess x)
-(< (abs (- (square guess) x)) 0.001))
+    (< (abs (- (square guess) x)) 0.001)
+)
+
+(define (improve guess x)
+    (display guess)
+    (newline)
+    (average guess (/ x guess))
+)
+
+(define (average x y)
+    (/ (+ x y) 2)
+)
+
 
 (define (square x) (* x x))
 (define (sqrt x) (sqrt-iter 1.0 x))
 
-;; This fails spectacularly because the correctness required is too large compared to the answer?
-; (display (square (sqrt 0.000000000009)))
-
-;;(display (square (sqrt 10000000000000))) ;; seems at 10^13 it starts to take forever? Cos of the number overflows? Nothing so far that mentions
-;; the precision of numbers in lisp
+;(sqrt 10000000000000)
+; the above doesn't work because the number has a limited precision and the approximation doesn't keep tending to zero.
 
 ;; below is a new good enough that uses relative magnitude of error instead of absolute
 
