@@ -1,4 +1,3 @@
-#lang racket
 
 (define (even? b)
     (if (= (remainder b 2) 0)
