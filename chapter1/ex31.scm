@@ -1,4 +1,18 @@
 
+(define (term x)
+    (define (double x)
+        (* x 2)
+    )
+    (define (square x)
+        (* x x)
+    )
+    (/ (* (double x) (double (+ x 1))) (square (+ (double x) 1)))
+)
+
+(define (next x)
+    (+ x 1)
+)
+
 (define (product term a next b)
     (define (iter a result)
         (if (> a b)
@@ -24,20 +38,24 @@
 (display (factorial 5))
 (newline)
 
-(define (term x)
-    (define (double x)
-        (* x 2)
-    )
-    (define (square x)
-        (* x x)
-    )
-    (/ (* (double x) (double (+ x 1))) (square (+ (double x) 1)))
-)
-
-(define (next x)
-    (+ x 1)
-)
 (define (compute-pi precision)
     (* 4 (product term 1 next precision))
 )
-(compute-pi 1000)
+(display (compute-pi 1000))
+(newline)
+(newline)
+
+
+; b
+; write with a recursive process
+(define (product-recursive term a next b)
+    (if (> a b)
+        1.0
+        (* (term a) (product-recursive term (next a) next b))
+    )
+)
+(define (compute-pi precision)
+    (* 4 (product-recursive term 1 next precision))
+)
+(display (compute-pi 1000))
+(newline)
