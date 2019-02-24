@@ -43,10 +43,17 @@
         (= (remainder b a) 0)
     )
 
+    (define (next test-divisor)
+        (if (= test-divisor 2)
+            3
+            (+ test-divisor 2)
+        )
+    )
+
     (define (find-divisor n test-divisor)
         (cond   ((> (square test-divisor) n) n)
                 ((divides? test-divisor n) test-divisor)
-                (else (find-divisor n (+ test-divisor 1)))
+                (else (find-divisor n (next test-divisor)))
         )
     )
     (define (smallest-divisor n)
@@ -65,11 +72,10 @@
 )
 
 
-(search-for-primes 1 100)
-(search-for-primes 100000000 100000050)
-(search-for-primes 1000000000 1000000050)
-(search-for-primes 10000000000 10000000050)
+;; (search-for-primes 100000000 100000050)
+;; (search-for-primes 1000000000 1000000050)
+;; (search-for-primes 10000000000 10000000050)
+;; (search-for-primes 100000000000 100000000050)
+(search-for-primes 1000000000000 1000000000050)
 
-;; (timed-prime-test 100000000019)
-
-; yes the time data shows that the time is multiplied by sqrt(10) whenever the range is increased by 10
+; It is faster not twice as fast, perhaps because there are other operations aside from the prime?

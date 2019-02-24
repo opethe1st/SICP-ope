@@ -30,12 +30,40 @@
 )
 
 (define (start-prime-test n start-time)
-    (if (prime? n)
+    (if (fast-prime? n 12)
         (report-prime (- (runtime) start-time))
         "NOT PRIME"
     )
 )
 
+(define (fast-prime? n times)
+    (define (expmod base exp m)
+        (cond   ((= exp 0) 1)
+                ((even? exp)
+                    (remainder
+                        (square (expmod base (/ exp 2) m))
+                        m
+                    )
+                )
+                (else
+                    (remainder
+                        (* base (expmod base (- exp 1) m))
+                        m
+                    )
+                )
+        )
+    )
+    (define (fermat-test n)
+        (define (try-it a)
+            (= (expmod a n n) a)
+        )
+        (try-it (+ 1 (random (- n 1))))
+    )
+    (cond   ((= times 0) #t)
+            ((fermat-test n) (fast-prime? n (- times 1)))
+            (else #t)
+    )
+)
 (define (prime? n)
     (define (square n) (* n n))
 
@@ -65,11 +93,18 @@
 )
 
 
-(search-for-primes 1 100)
-(search-for-primes 100000000 100000050)
-(search-for-primes 1000000000 1000000050)
-(search-for-primes 10000000000 10000000050)
+(timed-prime-test 1000000033)
+(timed-prime-test 10000000019)
+(timed-prime-test 10000000033)
 
-;; (timed-prime-test 100000000019)
+;; these were the times for finding the primes in ex22
+;; 1000000033 *** .04999999999999999
+;; 10000000019 *** .13999999999999996
+;; 10000000033 *** .14
 
-; yes the time data shows that the time is multiplied by sqrt(10) whenever the range is increased by 10
+
+;; in this exercise
+;; 1000000033 *** 0.
+;; 10000000019 *** 0.
+;; 10000000033 *** 0.%
+;; it appears computers are really fast these days, can't draw any conclusions given these numbers

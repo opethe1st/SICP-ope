@@ -1,5 +1,3 @@
-#lang racket
-
 
 (define (sum term a next b)
     (define (iter a result)
@@ -18,4 +16,4 @@
 (define (next x)
     (+ x 1)
 )
-(sum term 1 next 5)
+(display (sum term 1 next 5))

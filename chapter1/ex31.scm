@@ -1,5 +1,3 @@
-#lang racket
-
 
 (define (product term a next b)
     (define (iter a result)
@@ -10,6 +8,21 @@
     )
     (iter a 1.0)
 )
+
+;; Factorial in terms of product
+(define (factorial n)
+    (define (identity x) x)
+    (define (next x) (+ 1 x))
+    (product identity 1 next n)
+)
+
+;; test factorial
+(display (factorial 1))
+(newline)
+(display (factorial 3))
+(newline)
+(display (factorial 5))
+(newline)
 
 (define (term x)
     (define (double x)
