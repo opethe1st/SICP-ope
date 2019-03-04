@@ -1,5 +1,3 @@
-#lang racket
-
 
 (define tolerance 0.00001)
 
