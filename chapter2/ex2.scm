@@ -1,8 +1,6 @@
-#lang racket
 
-
-(define (make-segment a b)
-    (cons a b)
+(define (make-segment start end)
+    (cons start end)
 )
 
 (define (start-segment segment)

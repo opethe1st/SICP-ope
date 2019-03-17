@@ -1,5 +1,3 @@
-#lang racket
-
 (define (cons x y)
     (lambda (m) (m x y))
 )
