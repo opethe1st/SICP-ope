@@ -1,5 +1,4 @@
 
-
 (define zero
     (lambda (f) (lambda (x) x))
 )
@@ -22,7 +21,7 @@
 )
 
 
-(define (+ a b)
+(define (add a b)
     (lambda
         (f)
         (lambda
@@ -34,3 +33,12 @@
         )
     )
 )
+
+(define (inc x) (+ x 1))
+(display
+    (
+        ((add one two) inc)
+        0
+    )
+)
+(newline)
