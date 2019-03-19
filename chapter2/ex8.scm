@@ -11,11 +11,18 @@
     (cdr interval)
 )
 
-
-(define (sub-interval a b)
-    (make-interval
-        (- (lower-bound a) (upper-bound b))
-        (- (upper-bound a) (lower-bound b))
+(define (add-interval x y)
+    (make-interval  (+ (lower-bound x) (lower-bound y))
+                    (+ (upper-bound x) (upper-bound y))
+    )
+)
+(define (sub-interval x y)
+    (add-interval
+        x
+        (make-interval
+            (- (upper-bound y))
+            (- (lower-bound y))
+        )
     )
 )
 
