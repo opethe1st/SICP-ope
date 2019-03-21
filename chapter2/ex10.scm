@@ -25,7 +25,7 @@
 
 (define (div-interval x y)
     (if (or (= (lower-bound y) 0)
-            (= (upeer-bound y) 0)
+            (= (upper-bound y) 0)
         )
         (error "Undefined to have the bounds of the interval set to Zero")
     )
