@@ -1,5 +1,3 @@
-#lang racket
-
 
 (define (last-pair items)
     (if (null? (cdr items))
