@@ -14,22 +14,22 @@
 
 (define (add-vect v1 v2)
     (make-vector
-        (+ (x-cor-vectv1) (x-cor-vectv2))
-        (+ (y-cor-vectv1) (y-cor-vectv2))
+        (+ (x-cor-vect v1) (x-cor-vect v2))
+        (+ (y-cor-vect v1) (y-cor-vect v2))
     )
 )
 
 (define (sub-vect v1 v2)
     (make-vect
-        (- (x-cor-vectv1) (x-cor-vectv2))
-        (- (y-cor-vectv1) (y-cor-vectv2))
+        (- (x-cor-vect v1) (x-cor-vect v2))
+        (- (y-cor-vect v1) (y-cor-vect v2))
     )
 )
 
 (define (scale-vect s v)
     (make-vect
-        (* s (x-cor-vectv))
-        (* s (y-cor-vectv))
+        (* s (x-cor-vect v))
+        (* s (y-cor-vect v))
     )
 )
 
