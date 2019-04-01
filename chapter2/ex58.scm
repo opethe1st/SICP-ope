@@ -5,7 +5,7 @@
 (define (make-sum a1 a2)
     (cond ((=number? a1 0) a2) ((=number? a2 0) a1)
         ((and (number? a1) (number? a2)) (+ a1 a2))
-        (else (list '+ a1 a2))
+        (else (list a1 '+ a2))
     )
 )
 
@@ -19,19 +19,19 @@
         ((=number? m1 1) m2)
         ((=number? m2 1) m1)
         ((and (number? m1) (number? m2)) (* m1 m2))
-        (else (list '* m1 m2))
+        (else (list m1 '* m2))
     )
 )
 
-(define (sum? x) (and (pair? x) (eq? (car x) '+)))
+(define (sum? x) (and (pair? x) (eq? (cadr x) '+)))
 
-(define (addend s) (cadr s))
+(define (addend s) (car s))
 
 (define (augend s) (caddr s))
 
-(define (product? x) (and (pair? x) (eq? (car x) '*)))
+(define (product? x) (and (pair? x) (eq? (cadr x) '*)))
 
-(define (multiplier p) (cadr p))
+(define (multiplier p) (car p))
 
 (define (multiplicand p) (caddr p))
 
@@ -39,17 +39,17 @@
     (cond
         ((= exponent 0) 1)
         ((= exponent 1) base)
-        (else (list '** base exponent))
+        (else (list base '** exponent))
     )
 )
 
 (define (exponentiation? x)
-    (and (pair? x) (eq? (car x) '**))
+    (and (pair? x) (eq? (cadr x) '**))
 )
 
 (define (base expr)
     (if (exponentiation? expr)
-        (cadr expr)
+        (car expr)
         (error "trying to find the base of an expression that's not an exponent")
     )
 )
@@ -100,40 +100,15 @@
     )
 )
 
-(define (accumulate op initial sequence)
-    (if (null? sequence)
-        initial
-        (op
-            (car sequence)
-            (accumulate op initial (cdr sequence))
-        )
-    )
-)
 
-(define (make-sum-multiple . a)
-    (accumulate
-        make-sum
-        0
-        a
-    )
-)
+(deriv '(x + 3) 'x)
 
-(define (make-product-multiple . a)
-    (accumulate
-        make-product
-        1
-        a
-    )
-)
 
-(make-sum-multiple 'x 'y 1 2 3)
+(deriv '(x * y) 'x)
 
-(deriv (make-sum-multiple 'x 'x 'x) 'x)
-)
-(deriv
-    (make-sum-multiple  (make-product 3 'x) (make-sum-multiple 'x 'y 2))
-    'x
-)
+(deriv '((x * y) * (x + 3)) 'x)
 
-(deriv (make-product-multiple 'x 'x 'x) 'x)
-)
+
+(deriv '(x ** 5) 'x)
+(deriv '(x ** 1) 'x)
+(deriv '(x ** 0) 'x)
