@@ -110,7 +110,7 @@
 )
 
 (define (intersection-set s1 s2)
-    (list->tree (intersection-set-ordered-list (tree->list s1) (tree->list s1)))
+    (list->tree (intersection-set-ordered-list (tree->list s1) (tree->list s2)))
 )
 
 
@@ -120,5 +120,5 @@
 )
 (intersection-set
     (list->tree (list 1 2 4))
-    (list->tree (list 3 5 6 1))
+    (list->tree (list 1 3 5 6))
 )
