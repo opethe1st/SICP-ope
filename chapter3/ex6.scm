@@ -1,0 +1,31 @@
+(define (rand-update x)
+    (let ((a 27) (b 26) (m 127))
+        (modulo (+ (* a x) b) m)
+    )
+)
+
+
+(define rand
+    (let ((x 12))
+        (lambda (method)
+            (cond
+                ((eq? method 'generate)
+                    (begin (set! x (rand-update x)) x)
+                )
+                ((eq? method 'reset)
+                    (lambda (reset-value)
+                        (set! x reset-value)
+                    )
+                )
+            )
+        )
+    )
+)
+
+(rand 'generate)
+(rand 'generate)
+(rand 'generate)
+((rand 'reset) 12)
+(rand 'generate)
+(rand 'generate)
+(rand 'generate)
