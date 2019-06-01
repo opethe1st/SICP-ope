@@ -38,3 +38,8 @@
 (define operation-table (make-table (lambda (x y) (equal? x y))))
 (define get (operation-table 'lookup-proc))
 (define put (operation-table 'insert-proc!))
+
+
+(get 1 2)
+(put 1 2 234)
+(get 1 2)

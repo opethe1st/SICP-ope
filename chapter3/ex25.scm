@@ -1,0 +1,101 @@
+(define (display-stuff a . z)
+    (display a)
+    (display " ")
+    (define (iter z)
+        (if (null? z)
+            (newline)
+            (begin
+                (display (car z))
+                (display " ")
+                (iter (cdr z))
+            )
+        )
+    )
+    (iter z)
+)
+
+;; local tables
+(define (make-table same-key?)
+    (let ((local-table (list '*table*)))
+
+    (define (assoc key records)
+        ;; (display-stuff "assoc: " "key: '" key "', " "records: " "'" records "'")
+        (cond
+            ((null? records) false)
+            ((same-key? key (caar records)) (car records))
+            (else (assoc key (cdr records)))
+        )
+    )
+
+
+    (define (lookup keyz)
+        (define (iter keys subtable)
+            ;; (display-stuff "lookup: " "keys: " keys ", " "subtable: " subtable)
+            (if subtable
+                (if (null? (cdr keys))
+                    (let ((record (assoc (car keys) (cdr subtable))))
+                        (if record
+                            (cdr record)
+                            false
+                        )
+                    )
+                    (iter (cdr keys) (assoc (car keys) (cdr subtable)))
+                )
+                false
+            )
+        )
+        (if (null? keyz)
+            (error "Keys can't be null")
+            (if (null? (cdr local-table))
+                false
+                (iter keyz local-table)
+            )
+        )
+    )
+
+    (define (insert! keys value)
+        (define (iter keys table)
+            (if (eq? (length keys) 0)
+                (set-cdr! table value)
+                (let ((subtable (assoc (car keys) (cdr table))))
+                    (if (not subtable)
+                        (let ((subtable (cons (car keys) '())))
+                            (set-cdr! table (cons subtable (cdr table)))
+                            (iter (cdr keys) subtable)
+                        )
+                        (iter (cdr keys) subtable)
+                    )
+                )
+            )
+        )
+        (if (null? keys)
+            (error "Keys can't be null")
+            (iter
+                keys
+                local-table
+            )
+        )
+    )
+    (define (dispatch m)
+      (cond ((eq? m 'lookup-proc) lookup)
+            ((eq? m 'insert-proc!) insert!)
+            (else (error "Unknown operation -- TABLE" m))))
+    dispatch))
+
+(define operation-table (make-table (lambda (x y) (equal? x y))))
+(define get (operation-table 'lookup-proc))
+(define put (operation-table 'insert-proc!))
+
+
+(display (get (list 1 2)))
+(newline)
+(put (list "math" "+") 123)
+(put (list "math" "-") 234)
+(put (list "letters" "a") 345)
+(put (list "letters" "b") 456)
+(display (get (list "math" "+")))
+(newline)
+(display (get (list "math" "123")))
+(newline)
+(display (get (list "letters" "b")))
+(newline)
