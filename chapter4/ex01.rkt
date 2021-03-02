@@ -3,7 +3,7 @@
 
 (define (list-of-values-left-to-right exps env)
     (define first (eval (first-operand exps) env))
-    (define right (list-of-values (rest-operands exps) env))
+    (define rest (list-of-values (rest-operands exps) env))
     (if (no-operands? exps)
         '()
         (cons
@@ -14,7 +14,7 @@
 )
 
 (define (list-of-values-right-to-left exps env)
-    (define right (list-of-values (rest-operands exps) env))
+    (define rest (list-of-values (rest-operands exps) env))
     (define first (eval (first-operand exps) env))
     (if (no-operands? exps)
         '()
